@@ -2,8 +2,27 @@ module Tree where
 
 import Test.Hspec
 
+-- When you create datatypes you can use the `deriving` keyword to have Haskell automatically
+-- create certain functions for you.
+--
+-- In the following example, `Eq` lets you compare values with the `==` function.
+-- `==`   is needed so that `shouldBe` can compare the expected value to the actual value.
+--
+-- `Show` defines the `show` function for your datatype, which is the Haskell equivalent of toString.
+-- `show` is needed to print incorrect values to the console for failing tests.
+--
+-- data AnotherType = ConstructAnotherType deriving (Eq, Show)
+
 -- You need to create this data type and the functions that operate on it
-data Tree = ???
+data Tree = Leaf
+          | Node Int Tree Tree deriving (Eq, Show)
+
+isLeaf     = undefined
+item       = undefined
+right      = undefined
+left       = undefined
+insert     = undefined
+insertList = undefined
 
 main = hspec $ do
   describe "Tree" $ do
@@ -47,9 +66,3 @@ main = hspec $ do
             nodeOne   = insert 3 singleton
             nodeTwo   = insert 1 nodeOne in
           item (left (left nodeTwo)) `shouldBe` 1
-
-    describe "insertList" $ do
-      it "inserts the elements of a list into a tree from left to right" $ do
-        let tree = insertList [5, 3, 1] Leaf in
-          (tree == (Node 5 (Node 3 (Node 1 Leaf Leaf) Leaf) Leaf)) `shouldBe` True
-
