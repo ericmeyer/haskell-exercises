@@ -17,11 +17,24 @@ import Test.Hspec
 data Tree = Leaf
           | Node Int Tree Tree deriving (Eq, Show)
 
-isLeaf     = undefined
-item       = undefined
-right      = undefined
-left       = undefined
-insert     = undefined
+isLeaf :: (Tree) -> Bool
+isLeaf Leaf = True
+isLeaf _    = False
+
+item :: Tree -> Int
+item (Node value _ _) = value
+
+right :: (Tree) -> Tree
+right (Node _ _ right) = right
+
+left :: (Tree) -> Tree
+left (Node _ left _) = left
+
+insert :: Int -> Tree -> Tree
+insert givenInt Leaf = (Node givenInt Leaf Leaf)
+insert givenInt (Node value left right) | givenInt < value = (Node value (insert givenInt left) right)
+                                        | otherwise = (Node value left (insert givenInt right))
+
 insertList = undefined
 
 main = hspec $ do

@@ -15,8 +15,16 @@ testTree = insertList [40, 50, 30, 20, 35, 45, 60, 10, 25, 33, 37, 43, 47, 48, 7
 --   right      :: Tree Int -> Tree Int
 
 -- Here are the functions you need to write
-find = undefined
-size = undefined
+-- find = undefined
+find :: (Int) -> (Tree Int) -> (Tree Int)
+find num tree | (isLeaf tree) = tree
+              | (item tree) == num = tree
+              | (item tree) > num = (find num (left tree))
+              | (item tree) < num = (find num (right tree))
+
+size :: (Tree Int) -> Int
+size tree | (isLeaf tree) = 0
+          | otherwise = (size (left tree)) + (size (right tree)) + 1
 
 -- Here are the tests
 main = hspec $ do
